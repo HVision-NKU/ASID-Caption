@@ -67,7 +67,86 @@
     }
   </style>
 
+
 </head>
+<style>
+  /* ===== Performance Horizontal Scroll (Manual + Auto) ===== */
+  
+  .perf-wrap { position: relative; }
+  
+  .perf-box {
+    height: 360px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 1px;
+    background: #fff;
+    padding: 1px;
+    box-sizing: border-box;
+  
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    line-height: 0; 
+  }
+  
+
+.perf-box img {
+  display: inline-block;
+  vertical-align: middle;
+  max-height: 100%;
+  max-width: 100%;
+  height: auto;
+  width: auto;
+
+  object-fit: contain;
+
+  margin-right: 18px;
+}
+  
+  /* 左右按钮 */
+  .perf-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    border: 1px solid rgba(0,0,0,0.15);
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+  
+  .perf-btn.left { left: -10px; }
+  .perf-btn.right { right: -10px; }
+  
+  .perf-btn:hover { background: rgba(255,255,255,1); }
+  
+  /* 角标 */
+  .perf-indicator {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 5;
+    font-size: 0.85rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.9);
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+  
+  /* 手机端 */
+  @media (max-width: 768px) {
+    .perf-box { height: 280px; }
+    .perf-btn { display: none; } /* 手机上用手拖就行 */
+  }
+  </style>
+
 <body>
 
 
@@ -534,13 +613,25 @@
       <div class="column is-four-fifths">
         <div class="content has-text-justified">
           <p>
-            ASID-Verify is a multi-stage pipeline that generates, ensembles, verifies, and refines audiovisual annotations.
-            It aligns speech with ASR transcripts and enforces timestamp consistency, then performs <b>attribute-wise evaluation</b> to identify missing/incorrect content and applies targeted refinement.
+            <b>ASID-Verify</b> is a three-stage pipeline designed to produce reliable, fine-grained audiovisual instructions.
+            Instead of generating a single caption in one pass, it progressively integrates, verifies, and refines annotations to ensure semantic and temporal consistency.
           </p>
+          
           <ul>
-            <li><b>S1 Multi-source annotation:</b> audiovisual model + ASR + MLLM annotators.</li>
-            <li><b>S2 Ensembling & verification:</b> integrate complementary captions, verify against audiovisual evidence.</li>
-            <li><b>S3 Attribute-based eval & refinement:</b> per-attribute error/missing checks + format fixes.</li>
+            <li>
+              <b>S1 Multi-Source Annotation:</b>
+              Generate complementary captions using audiovisual models, ASR transcripts, and multimodal annotators to capture diverse visual and speech information.
+            </li>
+          
+            <li>
+              <b>S2 Ensembling & Verification:</b>
+              Integrate multi-source captions into a unified draft and verify them against audiovisual evidence, enforcing ASR alignment and timestamp consistency.
+            </li>
+          
+            <li>
+              <b>S3 Attribute-Level Evaluation & Refinement:</b>
+              Decompose captions into semantic attributes and perform per-attribute error and missing checks, followed by targeted refinement to suppress hallucinations and improve completeness.
+            </li>
           </ul>
         </div>
 
@@ -601,6 +692,41 @@
   </div>
 </section>
 
+
+<!-- Performance -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other">Performance</h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+
+
+        <div class="perf-wrap">
+          <button class="perf-btn left" type="button" aria-label="Prev" onclick="perfScroll(-1)">◀</button>
+          <button class="perf-btn right" type="button" aria-label="Next" onclick="perfScroll(1)">▶</button>
+          <div class="perf-indicator" id="perf-indicator">1 / 3</div>
+      
+
+        <div class="perf-box" id="perf-box">
+          <img src="Homepage/images/table1.png" alt="Perf 1">
+          <img src="Homepage/images/table2.png" alt="Perf 2">
+          <img src="Homepage/images/table3.png" alt="Perf 3">
+        </div>
+        
+        <div class="perf-indicator" id="perf-indicator">1 / 3</div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
 <!-- Citation -->
 <section class="hero is-light is-small">
   <div class="hero-body has-text-centered">
@@ -635,6 +761,101 @@
     </div>
   </div>
 </footer>
+
+<script>
+  let perfTimer = null;
+
+  function perfGetImages() {
+    const box = document.getElementById('perf-box');
+    if (!box) return [];
+    return Array.from(box.querySelectorAll('img'));
+  }
+
+  function perfUpdateIndicator() {
+    const box = document.getElementById('perf-box');
+    const ind = document.getElementById('perf-indicator');
+    if (!box || !ind) return;
+
+    const imgs = perfGetImages();
+    const total = imgs.length || 1;
+
+    // 找到当前最接近左边界的图片索引
+    let idx = 0;
+    let best = Infinity;
+    for (let i = 0; i < imgs.length; i++) {
+      const d = Math.abs(imgs[i].offsetLeft - box.scrollLeft);
+      if (d < best) { best = d; idx = i; }
+    }
+    ind.textContent = `${idx + 1} / ${total}`;
+  }
+
+  // 手动按钮：按“当前图片宽度+间距”滚动一张
+  function perfScroll(dir) {
+    const box = document.getElementById('perf-box');
+    const imgs = perfGetImages();
+    if (!box || imgs.length === 0) return;
+
+    // 当前在第几张
+    let cur = 0, best = Infinity;
+    for (let i = 0; i < imgs.length; i++) {
+      const d = Math.abs(imgs[i].offsetLeft - box.scrollLeft);
+      if (d < best) { best = d; cur = i; }
+    }
+
+    let next = cur + dir;
+    next = Math.max(0, Math.min(next, imgs.length - 1));
+    box.scrollTo({ left: imgs[next].offsetLeft, behavior: 'smooth' });
+  }
+
+  // 自动轮播：每 intervalMs 切到下一张；到末尾回到第一张
+  function perfAutoStart(intervalMs = 3500) {
+    const box = document.getElementById('perf-box');
+    const imgs = perfGetImages();
+    if (!box || imgs.length <= 1) return;
+
+    perfAutoStop();
+    perfTimer = setInterval(() => {
+      // 当前张
+      let cur = 0, best = Infinity;
+      for (let i = 0; i < imgs.length; i++) {
+        const d = Math.abs(imgs[i].offsetLeft - box.scrollLeft);
+        if (d < best) { best = d; cur = i; }
+      }
+      const next = (cur + 1) % imgs.length;
+      box.scrollTo({ left: imgs[next].offsetLeft, behavior: 'smooth' });
+    }, intervalMs);
+  }
+
+  function perfAutoStop() {
+    if (perfTimer) clearInterval(perfTimer);
+    perfTimer = null;
+  }
+
+  window.addEventListener('load', () => {
+    const box = document.getElementById('perf-box');
+    if (!box) return;
+
+    // 滚动时更新角标
+    box.addEventListener('scroll', () => requestAnimationFrame(perfUpdateIndicator));
+    perfUpdateIndicator();
+
+    // 悬停暂停自动轮播（桌面端）
+    box.addEventListener('mouseenter', perfAutoStop);
+    box.addEventListener('mouseleave', () => perfAutoStart(3500));
+
+    // 竖向滚轮映射为横向（更顺手）
+    box.addEventListener('wheel', (e) => {
+      const dx = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (dx !== 0) {
+        e.preventDefault();
+        box.scrollLeft += dx;
+      }
+    }, { passive: false });
+
+    // 默认开启自动轮播（不想要就注释掉）
+    perfAutoStart(3500);
+  });
+</script>
 
 </body>
 </html>
