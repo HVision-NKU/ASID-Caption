@@ -27,31 +27,35 @@ Our key idea is to provide attribute-structured supervision and verify each attr
 
 ## 🎬 Captioning Case of ASID-Caption
 
+<div align="center">
+
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/titanic.mp4" type="video/mp4">
-  </video>
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/sherlock.mp4" type="video/mp4">
-  </video>
+  <a href="https://asid-caption.github.io/Homepage/images/titanic.mp4">
+    <img src="assets/covers/titanic.png" width="95%">
+  </a>
+  <a href="https://asid-caption.github.io/Homepage/images/sherlock.mp4">
+    <img src="assets/covers/sherlock.png" width="95%">
+  </a>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/ironman4k.mp4" type="video/mp4">
-  </video>
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/KeNanStart.mp4" type="video/mp4">
-  </video>
+  <a href="https://asid-caption.github.io/Homepage/images/ironman4k.mp4">
+    <img src="assets/covers/ironman4k.jpg" width="45%">
+  </a>
+  <a href="https://asid-caption.github.io/Homepage/images/KeNanStart.mp4">
+    <img src="assets/covers/KeNanStart.jpg" width="45%">
+  </a>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/NBAslam30s.mp4" type="video/mp4">
-  </video>
-  <video width="45%" controls>
-    <source src="https://asid-caption.github.io/Homepage/images/poker.mp4" type="video/mp4">
-  </video>
+  <a href="https://asid-caption.github.io/Homepage/images/NBAslam30s.mp4">
+    <img src="assets/covers/NBAslam30s.jpg" width="45%">
+  </a>
+  <a href="https://asid-caption.github.io/Homepage/images/poker.mp4">
+    <img src="assets/covers/poker.jpg" width="45%">
+  </a>
+</div>
+
 </div>
 
 ## 🚀 Getting Started
