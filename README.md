@@ -36,7 +36,6 @@ Our key idea is to provide attribute-structured supervision and verify each attr
   </video>
 </div>
 
-
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <video width="45%" controls>
     <source src="https://asid-caption.github.io/Homepage/images/ironman4k.mp4" type="video/mp4">
@@ -54,7 +53,6 @@ Our key idea is to provide attribute-structured supervision and verify each attr
     <source src="https://asid-caption.github.io/Homepage/images/poker.mp4" type="video/mp4">
   </video>
 </div>
-
 
 ## 🚀 Getting Started
 
