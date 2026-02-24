@@ -40,19 +40,19 @@ Our key idea is to provide attribute-structured supervision and verify each attr
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <a href="https://asid-caption.github.io/Homepage/images/ironman4k.mp4">
-    <img src="assets/covers/ironman4k.jpg" width="45%">
+    <img src="assets/covers/ironman4k.png" width="95%">
   </a>
   <a href="https://asid-caption.github.io/Homepage/images/KeNanStart.mp4">
-    <img src="assets/covers/KeNanStart.jpg" width="45%">
+    <img src="assets/covers/KeNanStart.png" width="95%">
   </a>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <a href="https://asid-caption.github.io/Homepage/images/NBAslam30s.mp4">
-    <img src="assets/covers/NBAslam30s.jpg" width="45%">
+    <img src="assets/covers/NBAslam30s.png" width="95%">
   </a>
   <a href="https://asid-caption.github.io/Homepage/images/poker.mp4">
-    <img src="assets/covers/poker.jpg" width="45%">
+    <img src="assets/covers/poker.png" width="95%">
   </a>
 </div>
 
