@@ -31,28 +31,28 @@ Our key idea is to provide attribute-structured supervision and verify each attr
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <a href="https://asid-caption.github.io/Homepage/images/titanic.mp4">
-    <img src="assets/covers/titanic.png" width="95%">
+    <img src="assets/covers/titanic.png" width="45%">
   </a>
   <a href="https://asid-caption.github.io/Homepage/images/sherlock.mp4">
-    <img src="assets/covers/sherlock.png" width="95%">
+    <img src="assets/covers/sherlock.png" width="45%">
   </a>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <a href="https://asid-caption.github.io/Homepage/images/ironman4k.mp4">
-    <img src="assets/covers/ironman4k.png" width="95%">
+    <img src="assets/covers/ironman4k.png" width="45%">
   </a>
   <a href="https://asid-caption.github.io/Homepage/images/KeNanStart.mp4">
-    <img src="assets/covers/KeNanStart.png" width="95%">
+    <img src="assets/covers/KeNanStart.png" width="45%">
   </a>
 </div>
 
 <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
   <a href="https://asid-caption.github.io/Homepage/images/NBAslam30s.mp4">
-    <img src="assets/covers/NBAslam30s.png" width="95%">
+    <img src="assets/covers/NBAslam30s.png" width="45%">
   </a>
   <a href="https://asid-caption.github.io/Homepage/images/poker.mp4">
-    <img src="assets/covers/poker.png" width="95%">
+    <img src="assets/covers/poker.png" width="45%">
   </a>
 </div>
 
