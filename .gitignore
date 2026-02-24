@@ -1,0 +1,4 @@
+echo "*.whl" >> .gitignore
+echo "__pycache__/" >> .gitignore
+git add .gitignore
+git commit -m "Ignore wheel binaries"
